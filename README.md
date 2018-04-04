@@ -3,7 +3,7 @@
 A Webpack plugin that removes duplicate css rules from chunks leaving them only in the parent css asset.
 
 ## Many thanks
-Inititially, I thought that that kind of optimization could be part of amazing Nuno's Rodrigues [NMFR/optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin), but just to not mix it up I just have created the fork and did the job here. It could be that when you start working with that plugin such feature is already implemented in optimize-css-assets-webpack-plugin, so check that first before download that one (see [https://github.com/NMFR/optimize-css-assets-webpack-plugin/issues/41] for the details)
+Inititially, I thought that such kind of optimization could be part of amazing Nuno's Rodrigues [NMFR/optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin), but just to have flies and meatball separately I just created the fork and did the job here. It could be that when you start working with that plugin such feature is already implemented in optimize-css-assets-webpack-plugin, so check that first before download that one (see [https://github.com/NMFR/optimize-css-assets-webpack-plugin/issues/41] for the details)
 
 ## What does the plugin do?
 
