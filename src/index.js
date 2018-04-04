@@ -33,13 +33,13 @@ DedupeParentCssFromChunksWebpackPlugin.prototype.dedupeCssInChunk = function (as
     if (chunkOfAsset.length !== 1) {
         // skipping dedupe
         console.warn('DedupeParentCssFromChunksWebpackPlugin.dedupeCssInChunk() Error getting the chunk for asset', assetName);
-        return css;
+        return Promise.resolve(css);
     }
     chunkOfAsset = chunkOfAsset[ 0 ];
     const allParentsChunks = chunkOfAsset.parents;
     if (!allParentsChunks || !allParentsChunks.length) {
         // no parents then just return css
-        return css;
+        return Promise.resolve(css);
     }
 
     // This is the child chunk so we need to get all the parent sources
@@ -52,7 +52,7 @@ DedupeParentCssFromChunksWebpackPlugin.prototype.dedupeCssInChunk = function (as
 
     if (allParentsFilesSources.trim() === '') {
         // no parent css contents then just return css
-        return css;
+        return Promise.resolve(css);
     }
 
     // Create combined file for further comparison and analysing
