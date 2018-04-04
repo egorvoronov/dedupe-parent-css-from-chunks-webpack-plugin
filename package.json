@@ -1,11 +1,12 @@
 {
-  "name": "optimize-css-assets-webpack-plugin",
-  "version": "4.0.0",
-  "author": "Nuno Rodrigues",
-  "description": "A Webpack plugin to optimize \\ minimize CSS assets.",
+  "name": "dedupe-parent-css-from-chunks-webpack-plugin",
+  "version": "0.0.9",
+  "author": "Egor Voronov",
+  "description": "A Webpack plugin that removes duplicate css rules from chunks leaving them only in the parent css asset",
   "dependencies": {
-    "cssnano": "^3.4.0",
-    "last-call-webpack-plugin": "^3.0.0"
+    "postcss": "^6.0.21",
+    "postcss-discard-duplicates": "^2.1.0",
+    "last-call-webpack-plugin": "^2.1.2"
   },
   "main": "src/index.js",
   "scripts": {
@@ -18,19 +19,21 @@
     ],
     "testEnvironment": "node"
   },
-  "homepage": "http://github.com/NMFR/optimize-css-assets-webpack-plugin",
+  "homepage": "https://github.com/egorvoronov/dedupe-parent-css-from-chunks-webpack-plugin",
   "repository": {
     "type": "git",
-    "url": "http://github.com/NMFR/optimize-css-assets-webpack-plugin.git"
+    "url": "https://github.com/egorvoronov/dedupe-parent-css-from-chunks-webpack-plugin.git"
   },
   "keywords": [
     "CSS",
-    "minimize",
     "optimize",
+    "chunk",
+    "parent",
     "webpack",
     "remove",
     "duplicate",
-    "extract-text-webpack-plugin"
+    "dedupe",
+    "extract-css-chunks-webpack-plugin"
   ],
   "license": "MIT",
   "devDependencies": {
