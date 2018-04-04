@@ -43,7 +43,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.9",
-    "extract-text-webpack-plugin": "next",
+    "extract-css-chunks-webpack-plugin": "^2.0.18",
     "jest": "^22.1.4",
     "style-loader": "^0.20.1",
     "webpack": "^4.0.0"

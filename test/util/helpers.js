@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import ExtractCssChunksPlugin from 'extract-css-chunks-webpack-plugin';
 
 export function readFileOrEmpty(path) {
   try {
@@ -16,7 +16,7 @@ export const defaultConfig = {
     rules: [
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
+        use: ExtractCssChunksPlugin.extract({
           fallback: { loader: 'style-loader' },
           use: {
             loader: 'css-loader',

@@ -5,7 +5,7 @@ const postcssDiscardDuplicates = require('postcss-discard-duplicates');
 function DedupeParentCssFromChunksWebpackPlugin(options) {
     this.options = options || {};
     this.options.assetNameRegExp = this.options.assetNameRegExp || /\.css$/g;
-    this.options.canPrint = this.options.canPrint || true;
+    this.options.canPrint = this.options.canPrint !== undefined ? this.options.canPrint : true;
     this.options.map = this.options.map || undefined;
 
     const self = this;
