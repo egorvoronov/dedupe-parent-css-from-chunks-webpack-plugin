@@ -1,52 +1,50 @@
-# Optimize CSS Assets Webpack Plugin
+# Dedupe parent css from chunks webpack plugin
 
-A Webpack plugin to optimize \ minimize CSS assets.
+A Webpack plugin that removes duplicate css rules from chunks leaving them only in the parent css asset.
 
 ## What does the plugin do?
 
-It will search for CSS assets during the Webpack build and will optimize \ minimize the CSS (by default it uses [cssnano](http://github.com/ben-eb/cssnano) but a custom CSS processor can be specified).
+It will find all the parents for every chunk, will compare the css rules and will remove the duplicates from chunks only leaving the original rules only inside parent chunks (it uses [postcss](https://github.com/postcss/postcss) and  [postcss-discard-duplicates](https://github.com/ben-eb/postcss-discard-duplicates) for processing the assets).
 
-### Solves [extract-text-webpack-plugin](http://github.com/webpack/extract-text-webpack-plugin) CSS duplication problem:
+### Solves [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin) CSS duplication in chunks problem:
 
-Since [extract-text-webpack-plugin](http://github.com/webpack/extract-text-webpack-plugin) only bundles (merges) text chunks, if its used to bundle CSS, the bundle might have duplicate entries (chunks can be duplicate free but when merged, duplicate CSS can be created).
+Since [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin) creates separate css chunk for every your splitted js chunk it turns out that your css chunk could contain the rule that are already in the parent asset.
 
 ## Installation:
 
 Using npm:
 ```shell
-$ npm install --save-dev optimize-css-assets-webpack-plugin
+$ npm install --save-dev dedupe-parent-css-from-chunks-webpack-plugin
 ```
 
-> :warning: For webpack v3 or below please use `optimize-css-assets-webpack-plugin@3.2.0`. The `optimize-css-assets-webpack-plugin@4.0.0` version and above supports webpack v4.
+> :warning: This works only for webpack v3 or below. PRs are welcome for webpack v4 and above.
 
 ## Configuration:
 
 The plugin can receive the following options (all of them are optional):
 * assetNameRegExp: A regular expression that indicates the names of the assets that should be optimized \ minimized. The regular expression provided is run against the filenames of the files exported by the ExtractTextPlugin instances in your configuration, not the filenames of your source CSS files. Defaults to `/\.css$/g`
-* cssProcessor: The CSS processor used to optimize \ minimize the CSS, defaults to [cssnano](http://github.com/ben-eb/cssnano). This should be a function that follows cssnano.process interface (receives a CSS and options parameters and returns a Promise).
-* cssProcessorOptions: The options passed to the cssProcessor, defaults to `{}`
 * canPrint: A boolean indicating if the plugin can print messages to the console, defaults to `true`
 
 ## Example:
 
 ``` javascript
-var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ExtractCssChunks = require("extract-css-chunks-webpack-plugin");
+const DedupeParentCssFromChunksWebpackPlugin = require('dedupe-parent-css-from-chunks-webpack-plugin');
+
 module.exports = {
   module: {
     rules: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        loader: ExtractCssChunks.extract('style-loader', 'css-loader')
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('styles.css'),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.optimize\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorOptions: { discardComments: { removeAll: true } },
-      canPrint: true
+    new ExtractCssChunks('styles.css'),
+    new DedupeParentCssFromChunksWebpackPlugin({
+      assetNameRegExp: /\.optimize\.css$/g, // the default is /\.css$/g
+      canPrint: true // the default is true
     })
   ]
 };
