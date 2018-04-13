@@ -1,6 +1,6 @@
 {
   "name": "dedupe-parent-css-from-chunks-webpack-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Egor Voronov",
   "description": "A Webpack plugin that removes duplicate css rules from chunks leaving them only in the parent css asset",
   "dependencies": {
