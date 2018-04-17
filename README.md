@@ -25,7 +25,9 @@ $ npm install --save-dev dedupe-parent-css-from-chunks-webpack-plugin
 ## Configuration:
 
 The plugin can receive the following options (all of them are optional):
-* assetNameRegExp: A regular expression that indicates the names of the assets that should be optimized \ minimized. The regular expression provided is run against the filenames of the files exported by the ExtractTextPlugin instances in your configuration, not the filenames of your source CSS files. Defaults to `/\.css$/g`
+* assetNameRegExp: A regular expression that indicates the names of the assets that should be optimized \ minimized. The regular expression provided is run against the filenames of the files exported by the ExtractCssChunksPlugin instances in your configuration, not the filenames of your source CSS files. Defaults to `/\.css$/g`
+* filterParentsRegExp: A regular expression that indicates the names of the parent assets that should be optimized \ minimized. The regular expression provided is run against the parent filenames and needs to resolve which parents should take the duplication rules from its child (See https://github.com/egorvoronov/dedupe-parent-css-from-chunks-webpack-plugin/issues/1 for the details). Defaults to `null` which means all the parents would take away the duplication rules from its children
+
 * map: An object that would be passed as postcss processor option, defaults is `undefined`
 * canPrint: A boolean indicating if the plugin can print messages to the console, defaults to `true`
 
@@ -48,6 +50,7 @@ module.exports = {
     new ExtractCssChunks('styles.css'),
     new DedupeParentCssFromChunksWebpackPlugin({
       assetNameRegExp: /\.optimize\.css$/g, // the default is /\.css$/g
+      filterParentsRegExp: /\.parent-always-loaded\.css$/g, // the default is null
       map: { prev: ... } // the default is undefined
       canPrint: true // the default is true
     })
