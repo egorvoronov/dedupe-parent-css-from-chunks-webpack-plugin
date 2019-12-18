@@ -1,24 +1,9 @@
 {
   "name": "dedupe-parent-css-from-chunks-webpack-plugin",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": "Egor Voronov",
   "description": "A Webpack plugin that removes duplicate css rules from chunks leaving them only in the parent css asset",
-  "dependencies": {
-    "postcss": "^6.0.21",
-    "postcss-discard-duplicates": "^2.1.0",
-    "last-call-webpack-plugin": "^2.1.2"
-  },
   "main": "src/index.js",
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch"
-  },
-  "jest": {
-    "watchPathIgnorePatterns": [
-      "<rootDir>/test/js/*.*"
-    ],
-    "testEnvironment": "node"
-  },
   "homepage": "https://github.com/egorvoronov/dedupe-parent-css-from-chunks-webpack-plugin",
   "repository": {
     "type": "git",
@@ -36,17 +21,13 @@
     "extract-css-chunks-webpack-plugin"
   ],
   "license": "MIT",
+  "dependencies": {
+    "postcss": "^7.0.8",
+    "postcss-discard-duplicates": "^2.1.0",
+    "webpack-sources": "^1.1.0",
+    "lodash": "^4.17.4"
+  },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-jest": "^22.1.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "css-loader": "^0.28.9",
-    "diff": "^3.5.0",
-    "extract-css-chunks-webpack-plugin": "^2.0.18",
-    "jest": "^22.1.4",
-    "style-loader": "^0.20.1",
     "webpack": "^4.0.0"
   }
 }

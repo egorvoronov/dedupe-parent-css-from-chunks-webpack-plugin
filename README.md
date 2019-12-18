@@ -20,15 +20,12 @@ Using npm:
 $ npm install --save-dev dedupe-parent-css-from-chunks-webpack-plugin
 ```
 
-> :warning: This works only for webpack v3 or below. PRs are welcome for webpack v4 and above.
+> :warning: This works only with webpack v4 and above. For webpack 3 and below use version ^1.0.0 or ^2.0.0
 
 ## Configuration:
 
 The plugin can receive the following options (all of them are optional):
 * assetNameRegExp: A regular expression that indicates the names of the assets that should be optimized \ minimized. The regular expression provided is run against the filenames of the files exported by the ExtractTextPlugin instances in your configuration, not the filenames of your source CSS files. Defaults to `/\.css$/g`
-* baseFileRegExp: A regular expression that indicates the base filename and all the chunks would be compared with that file and duplicatest in base file and chunk would be kept only in base file and would be removed from the compared chunk. Default is `null`
-* duplicationRules: An array of rules that would be applied for deduplication process
-    * rule: is an array of regexps. First regexp is considered as a base filename where all the duplications would be moved from other regexp filenames. See the example belof for the details.
 * map: An object that would be passed as postcss processor option, defaults is `undefined`
 * canPrint: A boolean indicating if the plugin can print messages to the console, defaults to `true`
 
@@ -51,24 +48,6 @@ module.exports = {
     new ExtractCssChunks('styles.css'),
     new DedupeParentCssFromChunksWebpackPlugin({
       assetNameRegExp: /\.optimize\.css$/g, // the default is /\.css$/g
-      baseFileRegExp: /\/app\..*?\.?css$/g,  // the default is null
-      rules: [
-        /*
-        * This would be the algorithm for rules parsing
-        * 1. concat the files together
-        * 2. save as original file
-        * 3. do the deduplication
-        * 4. save as output
-        * 5. compare original file with the output - get the diff
-        * 6. put the diff into the destination file
-        * 7. remove the duplication in destination file if exist
-        * 8. remove the duplication in duplication files
-        */
-        {
-            destination: /\/app\..*?\.?css$/g,
-            duplications: [ /\/MiniPDPInterstitial\..*?\.?css$/g, /\/ErrorFullPage\..*?\.?css$/g ],
-        }
-      ],
       map: { prev: ... } // the default is undefined
       canPrint: true // the default is true
     })
